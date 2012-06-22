@@ -4,7 +4,7 @@ Plugin Name: Datafiles
 Plugin URI:
 Description: Allows sites to serve and track changes of root level XML, JSON, and other data files without directly uploading files to the server
 Version: 1.0
-License: GPL3
+License: GPL3 or later
 */
 
 /*  Datafiles
@@ -12,9 +12,11 @@ License: GPL3
  * Allows sites to serve and track changes of root level XML, JSON,
  * and other data files without directly uploading files to the server
  *
- * This plugin consitites a work of the United States Government and is
- * not subject to domestic copyright protection under 17 USC ¤ 105.
- * Licensing restrictions may apply when distributed outside the United States.
+ * The code contained within this plugin consitites a work of the 
+ * United States Government and is not subject to domestic copyright 
+ * protection under 17 USC ¤ 105. The plugin, as a derivative work of 
+ * a project distribued under the terms of the GNU General Public License 
+ * is itself licensed under GPL v3 or later.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +32,7 @@ License: GPL3
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @copyright 2012
- * @license GPL v3
+ * @license GPL v3 or later
  * @version 1.0
  * @package Datafiles
  */
