@@ -59,7 +59,6 @@ class WP_Datafiles {
 		add_filter( 'rewrite_rules_array' , array( &$this, 'rewrite' ) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'disable_rich_editor' ) );
 		add_action( 'admin_init', array( &$this, 'propegate' ) );
-		add_action( 'init', 'flush_rewrite_rules' );
 		add_filter( 'redirect_canonical', array( &$this, 'redirect_canonical_filter' ), 10, 2 );
 		add_filter( 'get_sample_permalink_html', array(&$this, 'sample_permalink_html_filter'), 10, 4);
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue' ) );
@@ -399,7 +398,11 @@ class WP_Datafiles {
 				wp_insert_term( $term, $this->taxonomy );
 
 			$posts = get_posts( array( 'post_type' => $this->post_type, 'post_status' => array( 'draft', 'publish' ) ) );
-
+		
+		//not a .gov, don't load posts
+		if ( stripos( get_bloginfo( 'home' ), '.gov' ) === false ) 
+			return;
+			
 		if ( empty( $posts ) ) {
 			foreach ( $this->initial_terms as $term ) {
 				foreach ( $this->initial_posts as $post ) {
