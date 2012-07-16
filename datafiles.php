@@ -547,11 +547,21 @@ class WP_Datafiles {
 
 	}
 	
+	/**
+	 * Look for JSONP callback prior to serving
+	 * @param string $content the post content
+	 * @return string the filtered content, with callback
+	 */
 	function jsonp_callback_filter( $content ) {
 		global $post;
 		
+		//verify post type
 		if ( get_post_type( $post ) != $this->post_type )
 			return $content; 
+			
+		//only json should have a callack
+		if ( $this->get_extension( $post ) != 'json' )
+			return $content;
 	
 		//check for callback and sanitize
 		if ( !$callback = get_query_var( 'callback' ) )
