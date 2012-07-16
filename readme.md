@@ -1,7 +1,7 @@
 Datafiles WordPress Plugin
 ==========================
 
-Allows machine-readable files like JSON or XML file to be versioned inside WordPress as a custom post type, and be properly cached and served without directly uploading them to the server.
+Allows machine-readable files like JSON or XML file to be versioned inside WordPress as a custom post type, and be properly cached and served without directly uploading them to the server.`
 
 How it works
 ------------
