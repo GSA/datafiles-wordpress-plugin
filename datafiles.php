@@ -44,6 +44,34 @@ class WP_Datafiles {
 	public $initial_terms = array( 'json', 'xml' );
 	public $initial_posts = array( 'digital-strategy' );
 	public $version = '1.0';
+	public $caps = array( 
+		'administrator' => array( 
+			'edit_datafiles'             => true,
+			'edit_others_datafiles'      => true,
+			'edit_private_datafiles'     => true,
+			'edit_published_datafiles'   => true,
+			'read_datafiles'             => true,
+			'read_private_datafiles'     => true,
+			'delete_datafile'            => true,
+			'delete_others_datafiles'    => true,
+			'delete_private_datafiles'   => true,
+			'delete_published_datafiles' => true,
+			'publish_datafiles'          => true,
+		),
+		'subscriber' => array( 
+			'edit_datafiles'             => false,
+			'edit_others_datafiles'      => false,
+			'edit_private_datafiles'     => false,
+			'edit_published_datafiles'   => false,
+			'read_datafiles'             => true,
+			'read_private_datafiles'     => false,
+			'delete_datafile'            => false,
+			'delete_others_datafiles'    => false,
+			'delete_private_datafiles'   => false,
+			'delete_published_datafiles' => false,
+			'publish_datafiles'          => false,
+		),
+	);
 
 	/**
 	 * Hook into WordPress Plugin API
@@ -66,6 +94,7 @@ class WP_Datafiles {
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue' ) );
 		add_filter( 'the_content', array( &$this, 'jsonp_callback_filter' ) );
 		add_filter( 'query_vars', array(&$this, 'add_query_var') );
+		add_action( 'init', array( &$this, 'add_caps' ) );
 		register_activation_hook( __FILE__, 'flush_rewrite_rules' );
 
 	}
@@ -106,7 +135,7 @@ class WP_Datafiles {
 			'query_var' => true,
 			'can_export' => true,
 			'rewrite' => true,
-			'capability_type' => 'post'
+			'capability_type' => 'datafile'
 		);
 
 		register_post_type( $this->post_type, $args );
@@ -584,6 +613,32 @@ class WP_Datafiles {
 	function add_query_var( $vars ) {
 		$vars[] = "callback";
 		return $vars;
+	}
+
+	/**
+	 * Adds plugin-specific caps to all roles so that 3rd party plugins can manage them
+	 */
+	function add_caps() {
+
+		global $wp_roles;
+		if ( ! isset( $wp_roles ) )
+			$wp_roles = new WP_Roles;
+
+		foreach (  $wp_roles->role_names as $role=>$label ) {
+
+			//if the role is a standard role, map the default caps, otherwise, map as a subscriber
+			$caps = ( array_key_exists( $role, $this->caps ) ) ? $this->caps[$role] : $this->caps['subscriber'];
+
+			//loop and assign
+			foreach ( $caps as $cap=>$grant ) {
+
+				//check to see if the user already has this capability, if so, don't re-add as that would override grant
+				if ( !isset( $wp_roles->roles[$role]['capabilities'][$cap] ) )
+					$wp_roles->add_cap( $role, $cap, $grant );
+
+			}
+		}
+
 	}
 
 }
