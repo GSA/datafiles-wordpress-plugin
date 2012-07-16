@@ -12,10 +12,10 @@ License: GPL3 or later
  * Allows sites to serve and track changes of root level XML, JSON,
  * and other data files without directly uploading files to the server
  *
- * The code contained within this plugin consitites a work of the 
- * United States Government and is not subject to domestic copyright 
- * protection under 17 USC § 105. The plugin, as a derivative work of 
- * a project distribued under the terms of the GNU General Public License 
+ * The code contained within this plugin consitites a work of the
+ * United States Government and is not subject to domestic copyright
+ * protection under 17 USC § 105. The plugin, as a derivative work of
+ * a project distribued under the terms of the GNU General Public License
  * is itself licensed under GPL v3 or later.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -45,8 +45,8 @@ class WP_Datafiles {
 	public $initial_terms = array( 'json', 'xml' );
 	public $initial_posts = array( 'digital-strategy' );
 	public $version = '1.0';
-	public $caps = array( 
-		'administrator' => array( 
+	public $caps = array(
+		'administrator' => array(
 			'edit_datafiles'             => true,
 			'edit_others_datafiles'      => true,
 			'edit_private_datafiles'     => true,
@@ -59,7 +59,7 @@ class WP_Datafiles {
 			'delete_published_datafiles' => true,
 			'publish_datafiles'          => true,
 		),
-		'subscriber' => array( 
+		'subscriber' => array(
 			'edit_datafiles'             => false,
 			'edit_others_datafiles'      => false,
 			'edit_private_datafiles'     => false,
@@ -107,36 +107,36 @@ class WP_Datafiles {
 	function register_cpt() {
 
 		$labels = array(
-			'name' => _x( 'Datafiles', 'datafile' ),
-			'singular_name' => _x( 'Datafile', 'datafile' ),
-			'add_new' => _x( 'Add New', 'datafile' ),
-			'add_new_item' => _x( 'Add New Datafile', 'datafile' ),
-			'edit_item' => _x( 'Edit Datafile', 'datafile' ),
-			'new_item' => _x( 'New Datafile', 'datafile' ),
-			'view_item' => _x( 'View Datafile', 'datafile' ),
-			'search_items' => _x( 'Search Datafiles', 'datafile' ),
-			'not_found' => _x( 'No datafiles found', 'datafile' ),
+			'name'               => _x( 'Datafiles', 'datafile' ),
+			'singular_name'      => _x( 'Datafile', 'datafile' ),
+			'add_new'            => _x( 'Add New', 'datafile' ),
+			'add_new_item'       => _x( 'Add New Datafile', 'datafile' ),
+			'edit_item'          => _x( 'Edit Datafile', 'datafile' ),
+			'new_item'           => _x( 'New Datafile', 'datafile' ),
+			'view_item'          => _x( 'View Datafile', 'datafile' ),
+			'search_items'       => _x( 'Search Datafiles', 'datafile' ),
+			'not_found'          => _x( 'No datafiles found', 'datafile' ),
 			'not_found_in_trash' => _x( 'No datafiles found in Trash', 'datafile' ),
-			'parent_item_colon' => _x( 'Parent Datafile:', 'datafile' ),
-			'menu_name' => _x( 'Datafiles', 'datafile' ),
+			'parent_item_colon'  => _x( 'Parent Datafile:', 'datafile' ),
+			'menu_name'          => _x( 'Datafiles', 'datafile' ),
 		);
 
 		$args = array(
-			'labels' => $labels,
-			'hierarchical' => false,
-			'supports' => array( 'title', 'editor', 'revisions' ),
-			'taxonomies' => array( 'extension' ),
-			'public' => true,
-			'show_ui' => true,
-			'show_in_menu' => true,
-			'show_in_nav_menus' => true,
-			'publicly_queryable' => true,
+			'labels'              => $labels,
+			'hierarchical'        => false,
+			'supports'            => array( 'title', 'editor', 'revisions' ),
+			'taxonomies'          => array( 'extension' ),
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'show_in_nav_menus'   => true,
+			'publicly_queryable'  => true,
 			'exclude_from_search' => true,
-			'has_archive' => false,
-			'query_var' => true,
-			'can_export' => true,
-			'rewrite' => true,
-			'capability_type' => 'datafile'
+			'has_archive'         => false,
+			'query_var'           => true,
+			'can_export'          => true,
+			'rewrite'             => true,
+			'capability_type'     => 'datafile'
 		);
 
 		register_post_type( $this->post_type, $args );
@@ -150,32 +150,32 @@ class WP_Datafiles {
 	function register_ct() {
 
 		$labels = array(
-			'name' => _x( 'Extensions', 'extension' ),
-			'singular_name' => _x( 'Extension', 'extension' ),
-			'search_items' => _x( 'Search Extensions', 'extension' ),
-			'popular_items' => _x( 'Popular Extensions', 'extension' ),
-			'all_items' => _x( 'All Extensions', 'extension' ),
-			'parent_item' => _x( 'Parent Extension', 'extension' ),
-			'parent_item_colon' => _x( 'Parent Extension:', 'extension' ),
-			'edit_item' => _x( 'Edit Extension', 'extension' ),
-			'update_item' => _x( 'Update Extension', 'extension' ),
-			'add_new_item' => _x( 'Add New Extension', 'extension' ),
-			'new_item_name' => _x( 'New Extension', 'extension' ),
+			'name'                       => _x( 'Extensions', 'extension' ),
+			'singular_name'              => _x( 'Extension', 'extension' ),
+			'search_items'               => _x( 'Search Extensions', 'extension' ),
+			'popular_items'              => _x( 'Popular Extensions', 'extension' ),
+			'all_items'                  => _x( 'All Extensions', 'extension' ),
+			'parent_item'                => _x( 'Parent Extension', 'extension' ),
+			'parent_item_colon'          => _x( 'Parent Extension:', 'extension' ),
+			'edit_item'                  => _x( 'Edit Extension', 'extension' ),
+			'update_item'                => _x( 'Update Extension', 'extension' ),
+			'add_new_item'               => _x( 'Add New Extension', 'extension' ),
+			'new_item_name'              => _x( 'New Extension', 'extension' ),
 			'separate_items_with_commas' => _x( 'Separate extensions with commas', 'extension' ),
-			'add_or_remove_items' => _x( 'Add or remove Extensions', 'extension' ),
-			'choose_from_most_used' => _x( 'Choose from most used Extensions', 'extension' ),
-			'menu_name' => _x( 'Extensions', 'extension' ),
+			'add_or_remove_items'        => _x( 'Add or remove Extensions', 'extension' ),
+			'choose_from_most_used'      => _x( 'Choose from most used Extensions', 'extension' ),
+			'menu_name'                  => _x( 'Extensions', 'extension' ),
 		);
 
 		$args = array(
-			'labels' => $labels,
-			'public' => false,
+			'labels'            => $labels,
+			'public'            => false,
 			'show_in_nav_menus' => true,
-			'show_ui' => true,
-			'show_tagcloud' => false,
-			'hierarchical' => false,
-			'rewrite' => false,
-			'query_var' => true
+			'show_ui'           => true,
+			'show_tagcloud'     => false,
+			'hierarchical'      => false,
+			'rewrite'           => false,
+			'query_var'         => true,
 		);
 
 		register_taxonomy( $this->taxonomy, array( $this->post_type ), $args );
@@ -432,11 +432,11 @@ class WP_Datafiles {
 				wp_insert_term( $term, $this->taxonomy );
 
 			$posts = get_posts( array( 'post_type' => $this->post_type, 'post_status' => array( 'draft', 'publish' ) ) );
-		
+
 		//not a .gov, don't load posts
-		if ( stripos( get_bloginfo( 'home' ), '.gov' ) === false ) 
+		if ( stripos( get_bloginfo( 'home' ), '.gov' ) === false )
 			return;
-			
+
 		if ( empty( $posts ) ) {
 			foreach ( $this->initial_terms as $term ) {
 				foreach ( $this->initial_posts as $post ) {
@@ -576,7 +576,7 @@ class WP_Datafiles {
 		wp_localize_script( 'datafiles', 'datafiles', $l10n );
 
 	}
-	
+
 	/**
 	 * Look for JSONP callback prior to serving
 	 * @param string $content the post content
@@ -584,26 +584,26 @@ class WP_Datafiles {
 	 */
 	function jsonp_callback_filter( $content ) {
 		global $post;
-		
+
 		//verify post type
 		if ( get_post_type( $post ) != $this->post_type )
-			return $content; 
-			
+			return $content;
+
 		//only json should have a callack
 		if ( $this->get_extension( $post ) != 'json' )
 			return $content;
-	
+
 		//check for callback and sanitize
 		if ( !$callback = get_query_var( 'callback' ) )
 			return $content;
 
-		//http://stackoverflow.com/a/10900911/1082542	
+		//http://stackoverflow.com/a/10900911/1082542
 		if ( preg_match( '/[^0-9a-zA-Z\$_]|^(abstract|boolean|break|byte|case|catch|char|class|const|continue|debugger|default|delete|do|double|else|enum|export|extends|false|final|finally|float|for|function|goto|if|implements|import|in|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|super|switch|synchronized|this|throw|throws|transient|true|try|typeof|var|volatile|void|while|with|NaN|Infinity|undefined)$/', $callback) )
 			return $content;
-		
+
 		return "{$callback}($content);";
-		
-	
+
+
 	}
 
 	/**
