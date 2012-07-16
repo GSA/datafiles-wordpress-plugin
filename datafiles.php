@@ -96,6 +96,7 @@ class WP_Datafiles {
 		add_filter( 'the_content', array( &$this, 'jsonp_callback_filter' ) );
 		add_filter( 'query_vars', array(&$this, 'add_query_var') );
 		add_action( 'init', array( &$this, 'add_caps' ) );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue_css' ) );
 		register_activation_hook( __FILE__, 'flush_rewrite_rules' );
 
 	}
@@ -136,7 +137,8 @@ class WP_Datafiles {
 			'query_var'           => true,
 			'can_export'          => true,
 			'rewrite'             => true,
-			'capability_type'     => 'datafile'
+			'capability_type'     => 'datafile',
+			'menu_icon'           => plugins_url( '/img/menu-icon.png', __FILE__ ),
 		);
 
 		register_post_type( $this->post_type, $args );
@@ -641,7 +643,19 @@ class WP_Datafiles {
 		}
 
 	}
+	
+	/**
+	 * Conditionally enqueue CSS file on datafile pages
+	 */
+	function enqueue_css() { 	
 
+		if ( get_current_screen()->post_type != $this->post_type )
+			return;
+
+		wp_enqueue_style( 'datafiles', plugins_url( '/css/style.css', __FILE__ ), null, $this->version );
+
+	}
+	
 }
 
 

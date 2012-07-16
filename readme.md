@@ -13,7 +13,13 @@ History
 
 Created as a proof-of-concept to show how a machine-readable files could be served by a CMS in conjunction with the President's Digital Strategy.
 
+Note
+----
+
+This plugin allows users to serve unfiltered content to visitors. By default, only administrators have access to edit datafiles. Additional capabilities can be granted via third-party plugins such as the [Members plugin](http://wordpress.org/extend/plugins/members/).
+
 License
 -------
 
-GPLv3 or later
+* Plugin - GPLv3 or later
+* Icon - [CC0](https://creativecommons.org/about/cc0) via the [Noun Project](http://thenounproject.com/noun/source-code/#icon-No1171)
