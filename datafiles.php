@@ -14,7 +14,7 @@ License: GPL3 or later
  *
  * The code contained within this plugin consitites a work of the 
  * United States Government and is not subject to domestic copyright 
- * protection under 17 USC ค 105. The plugin, as a derivative work of 
+ * protection under 17 USC ยง 105. The plugin, as a derivative work of 
  * a project distribued under the terms of the GNU General Public License 
  * is itself licensed under GPL v3 or later.
  *
@@ -35,6 +35,7 @@ License: GPL3 or later
  * @license GPL v3 or later
  * @version 1.0
  * @package Datafiles
+ * @author Benjamin J. Balter ( ben@balter.com || http://ben.balter.com )
  */
 
 class WP_Datafiles {
