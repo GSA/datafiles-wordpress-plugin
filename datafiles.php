@@ -281,7 +281,7 @@ class WP_Datafiles {
 		if ( !wp_verify_nonce( $_POST['_datafile_nonce'], 'datafiles' ) )
 			return;
 
-		if ( !current_user_can( 'edit_page', $post_id ) )
+		if ( !current_user_can( 'edit_datafile', $post_id ) )
 			return;
 
 		$slug = $this->get_public_slug( $post_id );
