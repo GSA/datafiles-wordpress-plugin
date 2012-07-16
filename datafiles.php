@@ -64,6 +64,8 @@ class WP_Datafiles {
 		add_filter( 'redirect_canonical', array( &$this, 'redirect_canonical_filter' ), 10, 2 );
 		add_filter( 'get_sample_permalink_html', array(&$this, 'sample_permalink_html_filter'), 10, 4);
 		add_action( 'admin_enqueue_scripts', array( &$this, 'enqueue' ) );
+		add_filter( 'the_content', array( &$this, 'jsonp_callback_filter' ) );
+		add_filter( 'query_vars', array(&$this, 'add_query_var') );
 		register_activation_hook( __FILE__, 'flush_rewrite_rules' );
 
 	}
@@ -456,7 +458,7 @@ class WP_Datafiles {
 	function redirect_canonical_filter( $redirect, $request ) {
 		global $post;
 
-		if ( !$post || $post->post_type != $this->post_type )
+		if ( !$post || get_post_type( $post ) != $this->post_type )
 			return $redirect;
 
 		return untrailingslashit( $redirect );
@@ -544,7 +546,35 @@ class WP_Datafiles {
 		wp_localize_script( 'datafiles', 'datafiles', $l10n );
 
 	}
+	
+	function jsonp_callback_filter( $content ) {
+		global $post;
+		
+		if ( get_post_type( $post ) != $this->post_type )
+			return $content; 
+	
+		//check for callback and sanitize
+		if ( !$callback = get_query_var( 'callback' ) )
+			return $content;
 
+		//http://stackoverflow.com/a/10900911/1082542	
+		if ( preg_match( '/[^0-9a-zA-Z\$_]|^(abstract|boolean|break|byte|case|catch|char|class|const|continue|debugger|default|delete|do|double|else|enum|export|extends|false|final|finally|float|for|function|goto|if|implements|import|in|instanceof|int|interface|long|native|new|null|package|private|protected|public|return|short|static|super|switch|synchronized|this|throw|throws|transient|true|try|typeof|var|volatile|void|while|with|NaN|Infinity|undefined)$/', $callback) )
+			return $content;
+		
+		return "{$callback}($content);";
+		
+	
+	}
+
+	/**
+	 * Tell's WP to recognize the jsonp callback query var
+	 * @param array $vars the query vars
+	 * @return array the modified query vars
+	 */
+	function add_query_var( $vars ) {
+		$vars[] = "callback";
+		return $vars;
+	}
 
 }
 
